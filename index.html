@@ -20,6 +20,8 @@
             --accent-emerald: #10B981;
             --accent-rose: #F43F5E;
             --accent-amber: #F59E0B;
+            --btn-clear-bg: #1E293B;
+            --btn-clear-hover: #334155;
         }
 
         * {
@@ -36,8 +38,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 12px;
-            overflow: hidden; /* Prevents body scrolling */
+            padding: 20px;
+            overflow: hidden; /* Fits cleanly inside view frame */
             background-image: 
                 radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
                 radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
@@ -45,20 +47,20 @@
 
         .dashboard-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 1050px; /* Expanded width for desktops */
             background: var(--card-bg);
-            border-radius: 14px;
+            border-radius: 16px;
             border: 1px solid var(--card-border);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
             overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        /* Compact Top Bar Header */
+        /* Top Bar Header */
         .top-header {
-            padding: 12px 20px;
-            background: rgba(17, 24, 39, 0.8);
+            padding: 16px 28px;
+            background: rgba(17, 24, 39, 0.85);
             border-bottom: 1px solid var(--card-border);
             display: flex;
             align-items: center;
@@ -68,16 +70,16 @@
         .header-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .header-title i {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             color: var(--accent-blue);
         }
 
         .header-title h1 {
-            font-size: 1.05rem;
+            font-size: 1.25rem;
             font-weight: 700;
             background: linear-gradient(to right, #FFFFFF, #93C5FD);
             -webkit-background-clip: text;
@@ -85,10 +87,10 @@
         }
 
         .header-badge {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--accent-cyan);
             background: rgba(6, 182, 212, 0.12);
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 6px;
             border: 1px solid rgba(6, 182, 212, 0.25);
             font-weight: 600;
@@ -98,39 +100,67 @@
         .grid-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            padding: 16px 20px;
+            gap: 24px;
+            padding: 24px 28px;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
             body { overflow-y: auto; height: auto; }
             .grid-wrapper { grid-template-columns: 1fr; }
+        }
+
+        .section-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
+            gap: 8px;
+            font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 10px;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* Compact Form Inputs */
+        /* Clear Button */
+        .btn-clear {
+            background: var(--btn-clear-bg);
+            color: #F3F4F6;
+            border: 1px solid var(--card-border);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-clear:hover {
+            background: var(--btn-clear-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--accent-rose);
+        }
+
+        /* Form Inputs */
         .input-group {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .input-group label {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.75rem;
+            gap: 8px;
+            font-size: 0.82rem;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             color: var(--text-muted);
         }
 
@@ -142,9 +172,9 @@
 
         .input-wrapper i {
             position: absolute;
-            left: 10px;
+            left: 12px;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .input-wrapper input {
@@ -152,9 +182,9 @@
             background: #0B0F17;
             border: 1px solid var(--card-border);
             border-radius: 8px;
-            padding: 6px 10px 6px 30px;
+            padding: 9px 12px 9px 36px;
             color: var(--text-main);
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             font-weight: 600;
             outline: none;
             transition: all 0.2s;
@@ -162,21 +192,21 @@
 
         .input-wrapper input:focus {
             border-color: var(--accent-blue);
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
 
         /* Output Metrics Grid */
         .results-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 12px;
         }
 
         .metric-card {
             background: #0B0F17;
             border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 10px;
+            border-radius: 10px;
+            padding: 12px 14px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -197,27 +227,27 @@
         }
 
         .metric-title {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .metric-value {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: var(--text-main);
         }
 
-        .value-eur { color: #F87171; font-size: 1.15rem; }
-        .value-inr { color: #34D399; font-size: 1.15rem; }
+        .value-eur { color: #F87171; font-size: 1.3rem; }
+        .value-inr { color: #34D399; font-size: 1.3rem; }
 
         .currency-badge {
-            font-size: 0.62rem;
-            padding: 1px 6px;
+            font-size: 0.65rem;
+            padding: 2px 7px;
             border-radius: 4px;
             font-weight: 700;
             margin-left: auto;
@@ -231,7 +261,7 @@
 <body>
 
 <div class="dashboard-container">
-    <!-- COMPACT HEADER BAR -->
+    <!-- TOP HEADER BAR -->
     <div class="top-header">
         <div class="header-title">
             <i class="fa-solid fa-chart-pie"></i>
@@ -244,8 +274,13 @@
     <div class="grid-wrapper">
         <!-- LEFT COLUMN: INPUT CONTROLS -->
         <div class="inputs-column">
-            <div class="section-header">
-                <i class="fa-solid fa-sliders"></i> Parameters
+            <div class="section-header-bar">
+                <div class="section-header">
+                    <i class="fa-solid fa-sliders"></i> Input Parameters
+                </div>
+                <button class="btn-clear" onclick="clearInputs()">
+                    <i class="fa-solid fa-rotate-left"></i> Clear Inputs
+                </button>
             </div>
 
             <div class="input-group">
@@ -291,8 +326,10 @@
 
         <!-- RIGHT COLUMN: COMPUTED METRICS -->
         <div class="outputs-column">
-            <div class="section-header">
-                <i class="fa-solid fa-square-poll-vertical"></i> Output Metrics
+            <div class="section-header-bar">
+                <div class="section-header">
+                    <i class="fa-solid fa-square-poll-vertical"></i> Output Metrics
+                </div>
             </div>
 
             <div class="results-grid">
@@ -395,6 +432,14 @@
         document.getElementById('resPenaltyInr').textContent = new Intl.NumberFormat('en-IN', {
             style: 'currency', currency: 'INR'
         }).format(penaltyInr);
+    }
+
+    // Function to clear all fields EXCEPT Quarter Target & Exchange Rate
+    function clearInputs() {
+        document.getElementById('lossCount').value = '';
+        document.getElementById('totalTxns').value = '';
+        document.getElementById('errorValEur').value = '';
+        calculate(); // Recalculate outputs after clearing
     }
 
     calculate();
