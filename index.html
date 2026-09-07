@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retail Loss & Penalty Calculator</title>
-    <!-- FontAwesome for icons -->
+    <title>Retail Loss Calculator</title>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,7 +13,6 @@
             --bg-main: #0B0F17;
             --card-bg: #111827;
             --card-border: #1F293D;
-            --card-hover: #1A2333;
             --text-main: #F3F4F6;
             --text-muted: #9CA3AF;
             --accent-blue: #3B82F6;
@@ -21,10 +20,6 @@
             --accent-emerald: #10B981;
             --accent-rose: #F43F5E;
             --accent-amber: #F59E0B;
-            --accent-purple: #8B5CF6;
-            --gradient-primary: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
-            --gradient-danger: linear-gradient(135deg, #EF4444 0%, #B91C1C 100%);
-            --gradient-success: linear-gradient(135deg, #10B981 0%, #047857 100%);
         }
 
         * {
@@ -37,101 +32,105 @@
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 30px 15px;
+            padding: 12px;
+            overflow: hidden; /* Prevents body scrolling */
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
         }
 
         .dashboard-container {
             width: 100%;
-            max-width: 1050px;
+            max-width: 900px;
             background: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 14px;
             border: 1px solid var(--card-border);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Banner Header */
-        .hero-banner {
-            position: relative;
-            height: 180px;
-            background: linear-gradient(to right, rgba(11, 15, 23, 0.95), rgba(11, 15, 23, 0.7)),
-                        url('https://images.unsplash.com/photo-1556742049-0a670f4a4591?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+        /* Compact Top Bar Header */
+        .top-header {
+            padding: 12px 20px;
+            background: rgba(17, 24, 39, 0.8);
+            border-bottom: 1px solid var(--card-border);
             display: flex;
             align-items: center;
-            padding: 0 35px;
-            border-bottom: 1px solid var(--card-border);
+            justify-content: space-between;
         }
 
-        .hero-title {
-            z-index: 2;
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .hero-title h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
+        .header-title i {
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+        }
+
+        .header-title h1 {
+            font-size: 1.05rem;
+            font-weight: 700;
             background: linear-gradient(to right, #FFFFFF, #93C5FD);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
 
-        .hero-title p {
-            color: var(--text-muted);
-            font-size: 0.92rem;
+        .header-badge {
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.12);
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            font-weight: 600;
         }
 
-        /* Grid Content */
+        /* Grid Content Layout */
         .grid-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 30px;
-            padding: 35px;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 16px 20px;
         }
 
-        @media (max-width: 850px) {
-            .grid-wrapper {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 700px) {
+            body { overflow-y: auto; height: auto; }
+            .grid-wrapper { grid-template-columns: 1fr; }
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
+            gap: 6px;
+            font-size: 0.8rem;
             font-weight: 700;
-            margin-bottom: 22px;
-            color: var(--text-main);
+            margin-bottom: 10px;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .section-header i {
-            color: var(--accent-blue);
-        }
-
-        /* Form Inputs */
+        /* Compact Form Inputs */
         .input-group {
-            margin-bottom: 18px;
+            margin-bottom: 8px;
         }
 
         .input-group label {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 6px;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             color: var(--text-muted);
         }
 
@@ -143,61 +142,44 @@
 
         .input-wrapper i {
             position: absolute;
-            left: 14px;
+            left: 10px;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            transition: color 0.3s;
+            font-size: 0.8rem;
         }
 
         .input-wrapper input {
             width: 100%;
             background: #0B0F17;
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 12px 14px 12px 40px;
+            border-radius: 8px;
+            padding: 6px 10px 6px 30px;
             color: var(--text-main);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
 
         .input-wrapper input:focus {
             border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-        }
-
-        .input-wrapper input:focus + i {
-            color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
         }
 
         /* Output Metrics Grid */
         .results-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        @media (max-width: 500px) {
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
+            gap: 8px;
         }
 
         .metric-card {
             background: #0B0F17;
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 16px;
-            transition: transform 0.2s, border-color 0.2s;
+            border-radius: 8px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .metric-card:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
+            justify-content: center;
         }
 
         .metric-card.full-width {
@@ -205,45 +187,38 @@
         }
 
         .metric-card.highlight-eur {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(17, 24, 39, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(17, 24, 39, 0.9) 100%);
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         .metric-card.highlight-inr {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(17, 24, 39, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(17, 24, 39, 0.9) 100%);
             border: 1px solid rgba(16, 185, 129, 0.3);
         }
 
         .metric-title {
-            font-size: 0.78rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .metric-value {
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             font-weight: 800;
             color: var(--text-main);
         }
 
-        .value-eur {
-            color: #F87171;
-            font-size: 1.4rem;
-        }
-
-        .value-inr {
-            color: #34D399;
-            font-size: 1.4rem;
-        }
+        .value-eur { color: #F87171; font-size: 1.15rem; }
+        .value-inr { color: #34D399; font-size: 1.15rem; }
 
         .currency-badge {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 12px;
+            font-size: 0.62rem;
+            padding: 1px 6px;
+            border-radius: 4px;
             font-weight: 700;
             margin-left: auto;
         }
@@ -256,15 +231,16 @@
 <body>
 
 <div class="dashboard-container">
-    <!-- HERO BANNER WITH IMAGE OVERLAY -->
-    <div class="hero-banner">
-        <div class="hero-title">
-            <h1><i class="fa-solid fa-chart-line text-accent"></i> Retail Loss Calculator</h1>
-            <p>Monitor shrink rates, extra loss margins, and automated penalty conversion.</p>
+    <!-- COMPACT HEADER BAR -->
+    <div class="top-header">
+        <div class="header-title">
+            <i class="fa-solid fa-chart-pie"></i>
+            <h1>Retail Loss Calculator</h1>
         </div>
+        <span class="header-badge"><i class="fa-solid fa-bolt"></i> Realtime</span>
     </div>
 
-    <!-- MAIN CALCULATOR WRAPPER -->
+    <!-- MAIN CALCULATOR GRID -->
     <div class="grid-wrapper">
         <!-- LEFT COLUMN: INPUT CONTROLS -->
         <div class="inputs-column">
@@ -297,7 +273,7 @@
             </div>
 
             <div class="input-group">
-                <label for="quarterTarget"><i class="fa-solid fa-crosshair"></i> Quarter Target (Allowed / 1k Txns)</label>
+                <label for="quarterTarget"><i class="fa-solid fa-crosshair"></i> Quarter Target (Allowed / 1k)</label>
                 <div class="input-wrapper">
                     <input type="number" id="quarterTarget" value="2.0" min="0" step="0.1" oninput="calculate()">
                     <i class="fa-solid fa-bullseye"></i>
@@ -305,9 +281,9 @@
             </div>
 
             <div class="input-group">
-                <label for="eurToInrRate"><i class="fa-solid fa-globe"></i> EUR to INR Exchange Rate (₹)</label>
+                <label for="eurToInrRate"><i class="fa-solid fa-globe"></i> EUR to INR Rate (₹)</label>
                 <div class="input-wrapper">
-                    <input type="number" id="eurToInrRate" value="90.50" min="0" step="0.01" oninput="calculate()">
+                    <input type="number" id="eurToInrRate" value="109.74" min="0" step="0.01" oninput="calculate()">
                     <i class="fa-solid fa-indian-rupee-sign"></i>
                 </div>
             </div>
@@ -316,7 +292,7 @@
         <!-- RIGHT COLUMN: COMPUTED METRICS -->
         <div class="outputs-column">
             <div class="section-header">
-                <i class="fa-solid fa-chart-pie"></i> Metrics & Output
+                <i class="fa-solid fa-square-poll-vertical"></i> Output Metrics
             </div>
 
             <div class="results-grid">
@@ -347,7 +323,7 @@
                 <!-- 4. Additional Losses -->
                 <div class="metric-card">
                     <div class="metric-title">
-                        <i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-rose);"></i> Additional Losses
+                        <i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-rose);"></i> Extra Losses
                     </div>
                     <div class="metric-value" id="resAddLosses">0</div>
                 </div>
@@ -376,33 +352,32 @@
 
 <script>
     function calculate() {
-        // Fetch inputs
         const lossCount = parseFloat(document.getElementById('lossCount').value) || 0;
         const totalTxns = parseFloat(document.getElementById('totalTxns').value) || 0;
         const errorValEur = parseFloat(document.getElementById('errorValEur').value) || 0;
         const quarterTarget = parseFloat(document.getElementById('quarterTarget').value) || 0;
         const eurToInrRate = parseFloat(document.getElementById('eurToInrRate').value) || 0;
 
-        // 1. Error / 1000 transactions = retail loss count / total transactions * 1000
+        // 1. Error / 1000 transactions
         const errorsPer1k = totalTxns > 0 ? (lossCount / totalTxns) * 1000 : 0;
 
-        // 2. Average error value = error value / retail loss count
+        // 2. Average error value
         const avgErrorVal = lossCount > 0 ? (errorValEur / lossCount) : 0;
 
-        // 3. Losses allowed = quarter target / 1000 * total transactions
+        // 3. Losses allowed
         const lossesAllowed = (quarterTarget / 1000) * totalTxns;
 
-        // 4. Additional losses = total retail loss count - losses allowed
+        // 4. Additional losses
         const addLossesRaw = lossCount - lossesAllowed;
-        const addLosses = addLossesRaw > 0 ? addLossesRaw : 0; // Clamped at 0 if no excess loss
+        const addLosses = addLossesRaw > 0 ? addLossesRaw : 0;
 
-        // 5. Penalty in Euro = Average error value x Additional losses
+        // 5. Penalty in Euro
         const penaltyEur = avgErrorVal * addLosses;
 
-        // 6. Penalty in INR = Penalty EUR x EUR/INR Exchange Rate
+        // 6. Penalty in INR
         const penaltyInr = penaltyEur * eurToInrRate;
 
-        // Format and render output values
+        // Render Outputs
         document.getElementById('resErrorsPer1k').textContent = errorsPer1k.toFixed(2);
         
         document.getElementById('resAvgErrorVal').textContent = new Intl.NumberFormat('de-DE', {
@@ -422,7 +397,6 @@
         }).format(penaltyInr);
     }
 
-    // Initial run on load
     calculate();
 </script>
 
