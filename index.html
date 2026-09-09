@@ -39,7 +39,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow: hidden; /* Fits viewport cleanly */
+            overflow: hidden; /* Fits viewport */
             background-image: 
                 radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
                 radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
@@ -47,7 +47,7 @@
 
         .dashboard-container {
             width: 100%;
-            max-width: 1050px; /* Spacious width for standard screens */
+            max-width: 1050px;
             background: var(--card-bg);
             border-radius: 16px;
             border: 1px solid var(--card-border);
@@ -225,6 +225,7 @@
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(17, 24, 39, 0.95) 100%);
             border: 1px solid rgba(16, 185, 129, 0.4);
             box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+            transition: all 0.3s ease;
         }
 
         .metric-title {
@@ -245,29 +246,34 @@
 
         .value-eur { color: #F87171; font-size: 1.3rem; }
         
-        /* ZOOM IN/OUT + PULSE ANIMATION FOR INR VALUE */
+        /* DEFAULT STATIC INR STYLE */
         .value-inr {
             color: #34D399;
             font-size: 1.35rem;
             display: inline-block;
-            animation: pulseScale 2.2s infinite ease-in-out;
             transform-origin: left center;
+            transition: all 0.3s ease;
         }
 
-        @keyframes pulseScale {
+        /* FLASHY ANIMATION (Active only when penalty > 0) */
+        .value-inr.flashy-active {
+            animation: pulseScaleFlash 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseScaleFlash {
             0% {
                 transform: scale(1);
-                opacity: 0.85;
+                color: #34D399;
                 text-shadow: 0 0 0px rgba(52, 211, 153, 0);
             }
             50% {
-                transform: scale(1.08); /* Zoom out / enlarged */
-                opacity: 1;
-                text-shadow: 0 0 12px rgba(52, 211, 153, 0.6);
+                transform: scale(1.1); /* Zoom Out */
+                color: #6EE7B7;
+                text-shadow: 0 0 16px rgba(52, 211, 153, 0.8), 0 0 25px rgba(16, 185, 129, 0.4);
             }
             100% {
-                transform: scale(1); /* Zoom in / reset */
-                opacity: 0.85;
+                transform: scale(1); /* Zoom In */
+                color: #34D399;
                 text-shadow: 0 0 0px rgba(52, 211, 153, 0);
             }
         }
@@ -401,7 +407,7 @@
                     <div class="metric-value value-eur" id="resPenaltyEur">€0.00</div>
                 </div>
 
-                <!-- 6. Penalty in INR (BLINKS & ZOOMS) -->
+                <!-- 6. Penalty in INR (FLASHY ONLY WHEN > 0) -->
                 <div class="metric-card full-width highlight-inr">
                     <div class="metric-title">
                         <i class="fa-solid fa-money-bill-transfer" style="color: #34D399;"></i> Penalty (INR)
@@ -456,12 +462,20 @@
             style: 'currency', currency: 'EUR'
         }).format(penaltyEur);
 
-        document.getElementById('resPenaltyInr').textContent = new Intl.NumberFormat('en-IN', {
+        const inrElem = document.getElementById('resPenaltyInr');
+        inrElem.textContent = new Intl.NumberFormat('en-IN', {
             style: 'currency', currency: 'INR'
         }).format(penaltyInr);
+
+        // FLASHY CONDITIONAL LOGIC
+        if (penaltyInr > 0) {
+            inrElem.classList.add('flashy-active');
+        } else {
+            inrElem.classList.remove('flashy-active');
+        }
     }
 
-    // Clear inputs except Quarter Target and Exchange Rate
+    // Clear inputs except Quarter Target & Rate
     function clearInputs() {
         document.getElementById('lossCount').value = '';
         document.getElementById('totalTxns').value = '';
